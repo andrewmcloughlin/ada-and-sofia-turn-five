@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Sacramento&display=swap" rel="stylesheet">
+
+        <link rel="icon" href="./images/favicon.ico" sizes="any">
+        <link rel="icon" href="./images/favicon.svg" type="image/svg+xml">
+        <meta name="theme-color" content="#FFFFFF">
+
+        <style>
+            body {
+                background: linear-gradient(135deg, #f3e4fc 0%, #f5e5ee 100%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                margin: 0;
+                font-family: 'Quicksand', sans-serif;
+                overflow-x: hidden;
+            }
+
+            .invitation-card {
+                position: relative;
+                z-index: 10;
+                padding: 40px 30px; 
+                background: rgba(255, 255, 255, 0.95); 
+                backdrop-filter: blur(10px);
+                border-radius: 24px;
+                box-sizing: border-box;
+                text-align: center;
+                box-shadow: 0 15px 35px rgba(218, 55, 196, 0.15);
+                width: 90%;
+                max-width: 440px;
+                margin: 20px 0;
+                border: 2px solid rgba(255, 182, 227, 0.3);
+            }
+
+            .card-header {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+            }
+
+            #unicorn {
+                width: 200px;
+                margin-bottom: 12px;
+                filter: drop-shadow(0 5px 10px rgba(0,0,0,0.08));
+            }
+
+            .badge {
+                display: inline-block;
+                background: #ffebee;
+                color: #a018c2;
+                padding: 6px 16px;
+                border-radius: 20px;
+                font-size: 0.8rem;
+                font-weight: 700;
+                letter-spacing: 1.5px;
+                text-transform: uppercase;
+                margin-bottom: 12px;
+            }
+
+            h1 {
+                font-family: 'Sacramento', cursive;
+                color: #da37c4;
+                font-size: 3.5rem;
+                margin: 0 0 5px 0;
+                line-height: 1;
+            }
+
+            .subtitle {
+                font-size: 1.1rem;
+                color: #666;
+                margin-bottom: 50px;
+                font-weight: 500;
+            }
+
+            .details-box {
+                background: #faf5f8;
+                border-radius: 16px;
+                padding: 18px;
+                margin-bottom: 25px;
+                text-align: left;
+                border: 1px dashed #f8bbd0;
+            }
+
+            .details-row {
+                display: flex;
+                margin-bottom: 12px;
+                align-items: flex-start;
+            }
+
+            .details-row:last-child {
+                margin-bottom: 0;
+            }
+
+            .details-label {
+                font-weight: 700;
+                color: #a814ad;
+                width: 75px;
+                flex-shrink: 0;
+            }
+
+            .details-content {
+                color: #444;
+                font-weight: 500;
+            }
+
+            .section-title {
+                font-size: 0.95rem;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                color: #888;
+                margin: 20px 0 10px 0;
+                font-weight: 700;
+                margin-top: 50px;
+                margin-top: 20px;
+            }
+
+            .chip-container {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                justify-content: center;
+                margin-bottom: 25px;
+            }
+
+            .chip {
+                background: #f3e5f5;
+                color: #7b1fa2;
+                padding: 6px 12px;
+                border-radius: 12px;
+                font-size: 0.85rem;
+                font-weight: 600;
+            }
+
+            .chip.highlight {
+                background: #e8f5e9;
+                color: #2e7d76;
+            }
+
+            .footer-note {
+                margin-top: 25px;
+            }
+
+            .rsvp-btn {
+                display: inline-block;
+                background: linear-gradient(135deg, #ffb0f4 0%, #6b73eb 100%);
+                color: white;
+                padding: 12px 35px;
+                border-radius: 30px;
+                text-decoration: none;
+                font-weight: 700;
+                font-size: 1rem;
+                box-shadow: 0 6px 20px rgba(216, 118, 230, 0.3);
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+                margin-bottom: 12px;
+            }
+
+            .rsvp-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 25px rgba(236, 64, 122, 0.4);
+            }
+
+            .rsvp-date {
+                font-size: 0.85rem;
+                color: #777;
+                display: block;
+            }
+        </style>
+
+        <title>Ada & Sofia's 5th Birthday Party Invitation</title>
+    </head>
+    <body>
+        <!-- The Liquid Canvas Background -->
+        <canvas id="liquidSource" style="display: none;"></canvas>
+        <div id="liquidContent" style="display: none;"></div>
+        <canvas class="liquid-output" id="liquidOutput" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none;"></canvas>
+
+        <section class="invitation-card">
+            <div class="card-header">
+                <img id="unicorn" src="./images/unicorn.svg" alt="Unicorn illustration"/>
+                <div class="badge">You're Invited!</div>
+                <h1>Ada & Sofia</h1>
+            </div>
+            <p class="subtitle">are turning 5!<br>Please join us for a magical celebration.</p>
+            
+            <div class="details-box">
+                <div class="details-row">
+                    <div class="details-label">When:</div>
+                    <div class="details-content">
+                        <a href="data:text/calendar;charset=utf-8,BEGIN%3AVCALENDAR%0AVERSION%3A2.0%0APRODID%3A-%2F%2FBirthday%20Party%2F%2FEN%0ABEGIN%3AVEVENT%0ASUMMARY%3AAda%20%26%20Sofia%27s%205th%20Birthday%20Party%0ADTSTART%3A20270103T150000Z%0ADTEND%3A20270103T170000Z%0ADESCRIPTION%3AA%20magical%20soft-play%20celebration%21%0AEND%3AVEVENT%0AEND%3AVCALENDAR" download="ada-and-sofia-birthday.ics">
+                            Sunday 3rd January at 3-5 PM
+                        </a>
+                    </div>
+                </div>
+                <div class="details-row">
+                    <div class="details-label">Where:</div>
+                    <div class="details-content">
+                        <a href="https://www.google.co.uk/maps/dir//The+Little+Gym+Cambridge,+Unit+2B,+Winship+Rd,+Milton,+Cambridge+CB24+6BQ/@52.2385551,0.1591646,232m/data=!3m1!1e3!4m17!1m7!3m6!1s0x47d870c40bf3210d:0x198449db58826495!2sThe+Little+Gym+Cambridge!8m2!3d52.2385542!4d0.1592161!16s%2Fg%2F11x98v12l!4m8!1m0!1m5!1m1!1s0x47d870c40bf3210d:0x198449db58826495!2m2!1d0.1592161!2d52.2385542!3e2?entry=ttu&g_ep=EgoyMDI2MDkyNy4xIKXMDSoASAFQAw%3D%3D" target="_blank">
+                            The Little Gym, Milton
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title">Entertainment</div>
+            <div class="chip-container">
+                <span class="chip highlight">Soft Play</span>
+            </div>
+            
+            <div class="section-title">Facilities</div>
+            <div class="chip-container">
+                <span class="chip">Free Parking</span>
+                <span class="chip">Baby Changing</span>
+                <span class="chip">Baby Toys</span>
+                <span class="chip">Kitchen</span>
+                <span class="chip">Toilets</span>
+                <span class="chip">Wheelchair Accessible</span>
+            </div>
+
+            <div class="footer-note" id="footerNote">
+                <a href="https://forms.gle/Az3k1FWarNkH9zfi9" class="rsvp-btn">RSVP Here</a>
+                <span class="rsvp-date">Please RSVP by Sunday 20th December</span>
+            </div>
+        </section>
+
+        <script src="./js/liquid.js"></script>
+        <script>
+            window.addEventListener("DOMContentLoaded", () => {
+                const elements = {
+                    source: document.getElementById("liquidSource"),
+                    content: document.getElementById("liquidContent"),
+                    output: document.getElementById("liquidOutput")
+                };
+
+                const liquidInstance = createLiquid(elements, {
+                    rainbow: true, 
+                    densityDissipation: 0.94,
+                    velocityDissipation: 0.98,
+                    force: 1.8,
+                    radius: 0.4,
+                    intensity: 0.01
+                });
+
+                if (!liquidInstance) {
+                    console.warn("WebGL liquid simulation not supported.");
+                    elements.output.style.display = "none";
+                }
+            });
+        </script>
+    </body>
+</html>
