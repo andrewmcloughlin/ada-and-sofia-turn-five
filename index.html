@@ -169,20 +169,31 @@
             }
 
 
-
             .rsvp-btn {
+                position: relative;
                 display: inline-block;
-                background: linear-gradient(135deg, #ffb0f4 0%, #6b73eb 100%);
-                color: white;
+                color: rgb(102, 102, 102);
                 padding: 12px 0px;
                 border-radius: 30px;
                 text-decoration: none;
-                font-weight: 700;
-                font-size: 1rem;
+                font-weight: 1000;
+                font-size: 1.5rem;
                 box-shadow: 0 6px 20px rgba(216, 118, 230, 0.3);
                 transition: transform 0.2s ease, box-shadow 0.2s ease;
                 margin-bottom: 12px;
                 width: 100%;
+                overflow: hidden; /* Clips the rotating background to the button's rounded corners */
+                z-index: 1;
+            }
+
+            .rsvp-btn::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: conic-gradient(from var(--angle) at 50% -110%, rgb(255, 165, 165), rgb(255, 255, 175), rgb(185, 255, 237), rgb(104, 255, 255), rgb(152, 152, 255), rgb(255, 174, 255), rgb(255, 173, 173));
+                animation: 10s rotate linear infinite;
+                opacity: 0.5;
+                z-index: -1;
             }
 
             .rsvp-btn:hover {
